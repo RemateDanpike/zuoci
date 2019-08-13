@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>测试页面</title>
+		<link rel="stylesheet" href="./leaflet1.03/leaflet.css" />		
+		<script src="./leaflet1.03/leaflet.js"></script>
+		<script src="./leaflet1.03/leaflet-tilelayer-colorfilter.min.js"></script>
+		
+		<script src="./pro/proj4-compressed.js"></script>
+		<script src="./pro/proj4leaflet.js"></script>	
+		<style>
+			html {
+				height: 100%
+			}
+			
+			body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.map {
+				height: 100%
+			}
+		</style>
+
+	</head>
+
+	<body>		
+		<div id="mapid" class="map"></div>
+		
+		
+		<script>
+			
+			  var res=[
+				        0.00549933137239034, // Level 0
+				        0.00274966568619517, // Level 1
+				        0.00137483284309758, // Level 2
+				        0.000687416421548792, // Level 3
+				        0.000343708210774396, // Level 4
+				        0.000171854105387198,
+				        8.5927052693599E-05,
+				        4.29635263467995E-05,
+				        2.14817631733998E-05,
+				        1.07408815866999E-05,
+				        5.37044079334994E-06,
+				        2.68522039667497E-06,
+				        1.34261019833748E-06		
+				    ];
+			 
+			 
+/* 			 var crs = new L.Proj.CRS('SR-ORG:7408',
+		        '+proj=longlat +ellps=GRS80 +no_defs',
+		        {
+		            resolutions: res,
+		            origin: [-180,90],
+		        }
+		        ); */
+				
+			var crs = new L.Proj.CRS('SR-ORG:7408',
+            '+proj=longlat +ellps=GRS80 +no_defs',
+            {
+                resolutions: res,
+                origin: [118.122912,31.286931],
+            }
+            );
+		        
+		
+					
+			var map = L.map('mapid', {
+				crs: crs
+				/*fullscreenControl: {
+					pseudoFullscreen: false
+				},*/
+			});
+			
+			//在这里修改滤镜参数
+			let defaultToDarkFilter = [
+       			         'blur:0px',//设置高斯模糊
+					    'brightness:100%',//设置图像明暗,
+						'contrast:100%',//设置图像对比度，0全暗
+						'grayscale:90%',//将图像转为灰度图像
+					//	'hue:180deg',//色相旋转
+						'opacity:100%',//图像透明度
+						'invert:5%',//图像反转
+						'saturate:300%',//图像饱和度
+					//	'sepia:0%',//图像转为深褐色 
+   			 ]
+			
+			//把url换成杭州市公共平台中申请的地图服务（VPN2或者VPN3的地图服务地址）
+			var url="http://172.18.107.12/74fff73f42ead4d1fa1f96d62eeaaa75f02587e3/Tile/ArcGISREST/hzsyvector201806_2000.gis";
+			var attrib = "&copy 杭州市规划局";
+			var basemap = L.tileLayer.colorFilter("http://172.18.107.12/74fff73f42ead4d1fa1f96d62eeaaa75f02587e3/Tile/ArcGISREST/hzsyvector201806_2000.gis/tile/{z}/{y}/{x}", {
+				tileSize: 256,				
+				attribution: attrib,
+				filter: defaultToDarkFilter
+			});
+			
+			
+		
+			  
+			map.addLayer(basemap);
+			map.setView([30.13215,120.07644], 9); //设置比例尺和中心点级别
+			
+
+              map.on('click', function (e) {
+              	
+              	 alert("You clicked the map at " + e.latlng);
+              });
+              	
+		</script>
+	</body>
+
+</html>
