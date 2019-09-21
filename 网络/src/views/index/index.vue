@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    var dw1 = 400, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
+    var dw1 = 700, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
     var centerPoint, activeNode = -1
     export default {
         name: "index",
@@ -213,9 +213,9 @@
     };
 </script>
 <style scoped lang="scss">
-    $oneWidth: vwMax(350); //一级圆直径
-    $twoWidth: vwMax(700); //一级虚线长度
-    $threeWidth: vwMax(300); //二级圆直径
+    $oneWidth: vwMax(220); //一级圆直径
+    $twoWidth: vwMax(400); //一级虚线长度
+    $threeWidth: vwMax(200); //二级圆直径
     $fiveWidth: vwMax(500); //二级虚线长度
     $sixWidth: vwMax(50); //三级圆直径
     .index {

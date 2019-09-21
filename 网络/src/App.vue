@@ -21,7 +21,7 @@
 </script>
 <style lang="scss" scoped>
     #app{
-        width: 100%;
-        height: 100%;
+        width: vwMax(3840);
+        height: vh(1080);
     }
 </style>
