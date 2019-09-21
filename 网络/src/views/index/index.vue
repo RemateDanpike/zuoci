@@ -234,7 +234,7 @@
     $fiveWidth: vwMax(500); //二级虚线长度
     $sixWidth: vwMax(50); //三级圆直径
     .index {
-        background: #bfc0ae;
+        /*background: #bfc0ae;*/
         position: relative;
         width: vwMax(3840);
         height: vh(1080);
