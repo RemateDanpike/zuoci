@@ -109,6 +109,7 @@
                 return [offsetX, offsetY]
             },
             lineChangeAnimate(target, dLength, prevOffset, fn) {
+                var that= this
                 let nextOffset
                 let _node = $(target).parent()//获取当前点击父元素
                 let _nodeAngle = _node.data('angle')//获取当前点击父元素的旋转角度
@@ -123,7 +124,7 @@
                 }
                 // let nextOffset = this.getNextOffset(_nodeAngle, _nodeAngleParent, dLength, prevOffset)
                 // console.log('偏移后点击中心坐标：' + nextOffset)
-                _node.animate({width: '+=' + dLength + 'px'}, 1000, fn)
+                _node.css({width: _node.width()+dLength + 'px'})
                 // var lineOffset = this.getLineWH(_nodeAngle, dLength)
                 // console.log('当前偏移距离数组：' + this.getLineWH(_nodeAngle, dw1))
                 return nextOffset
@@ -148,28 +149,24 @@
                 if ($(_this).hasClass('active')) {
                     $(_this).removeClass('active').nextAll().removeClass('active')
                     setTimeout(function () {
-                        $(_this).parent().animate({width: '-=' + dw1 + 'px'}, 1000)
+                        $(_this).parent().css({width: $(_this).parent().width()- dw1 + 'px'})
                         centerPoint = [$('.center').offset().left + $('.center').width() / 2, $('.center').offset().top + $('.center').height() / 2]
                         var finalMove = that.computedFinal(centerPoint)
-                        setTimeout(function () {
                             $('.position').animate({
                                 top: '+=' + finalMove[1],
                                 left: '+=' + finalMove[0]
                             }, 1000)
-                        }, 1000)
                     }, 1000)
                     activeNode = -1
                 } else {
                     if(activeNode!==-1){
                         $('.type1-common').eq(activeNode).find('.circle').removeClass('active').nextAll().removeClass('active')
                         setTimeout(function(){
-                            $('.type1-common').eq(activeNode).animate({width: '-=' + dw1 + 'px'}, 1000,function(){
+                            $('.type1-common').eq(activeNode).css({width: $('.type1-common').eq(activeNode).width()-dw1 + 'px'})
                                 activeNode = $(_this).data('index')
                                 // console.log('偏移后点击中心坐标：' + finalOffset)
-                            })
                             var finalOffset = that.lineChangeAnimate(_this, dw1, circlePoint, function () {})
                             var finalMove = that.computedFinal(finalOffset)
-                            setTimeout(function () {
                                 $('.position').animate({
                                     top: '+=' + finalMove[1],
                                     left: '+=' + finalMove[0]
@@ -179,7 +176,6 @@
                                 setTimeout(function () {
                                     $(_this).addClass('active').nextAll().addClass('active')
                                 }, 1600)
-                            }, 1000)
                         },1000)
                         return false
                     } else {
@@ -187,17 +183,15 @@
                         var finalOffset = that.lineChangeAnimate(this, dw1, circlePoint, function () {})
                         // console.log('偏移后点击中心坐标：' + finalOffset)
                         var finalMove = that.computedFinal(finalOffset)
-                        setTimeout(function () {
                             $('.position').animate({
                                 top: '+=' + finalMove[1],
                                 left: '+=' + finalMove[0]
-                            }, 1500, function () {
+                            }, 1000, function () {
                                 $(_this).nextAll().css('display', 'flex')
                             })
                             setTimeout(function () {
                                 $(_this).addClass('active').nextAll().addClass('active')
-                            }, 1600)
-                        }, 1000)
+                            }, 1050)
                     }
                 }
             })
@@ -255,6 +249,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: width 1s;
 
             .circle {
                 display: flex;
