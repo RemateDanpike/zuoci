@@ -21,7 +21,10 @@
 </script>
 <style lang="scss" scoped>
     #app{
-        width: vwMax(3840);
-        height: vh(1080);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: vwMax(4440);
+        height: vh(1680);
     }
 </style>
