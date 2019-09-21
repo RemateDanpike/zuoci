@@ -23,14 +23,14 @@
 </template>
 
 <script>
-    var remEqualpx, dw1 = 400, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
-    var centerPoint
+    var dw1 = 400, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
+    var centerPoint, activeNode = -1
     export default {
         name: "index",
         data() {
             return {
                 typeList: ['1', '2', '3', '4', '5', '', ''],
-                typeList2: ['1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5','1', '2', '3', '4', '5'],
+                typeList2: ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5'],
             }
         },
         components: {},
@@ -115,13 +115,13 @@
                 let _nodeAngleParent = _node.data('parentangle')//获取当前点击父元素的之前旋转角度
                 // console.log(_nodeAngle + _nodeAngleParent)
                 if (_nodeAngle + _nodeAngleParent < 360) {
-                    nextOffset = this.getNextOffset(_nodeAngle + _nodeAngleParent, dLength * remEqualpx, prevOffset)
+                    nextOffset = this.getNextOffset(_nodeAngle + _nodeAngleParent, dLength, prevOffset)
                 } else if ((_nodeAngle + _nodeAngleParent >= 360 && _nodeAngle + _nodeAngleParent < 720)) {
-                    nextOffset = this.getNextOffset(_nodeAngle + _nodeAngleParent - 360, dLength * remEqualpx, prevOffset)
+                    nextOffset = this.getNextOffset(_nodeAngle + _nodeAngleParent - 360, dLength, prevOffset)
                 } else {
-                    nextOffset = this.getNextOffset(_nodeAngle + _nodeAngleParent - 720, dLength * remEqualpx, prevOffset)
+                    nextOffset = this.getNextOffset(_nodeAngle + _nodeAngleParent - 720, dLength, prevOffset)
                 }
-                // let nextOffset = this.getNextOffset(_nodeAngle, _nodeAngleParent, dLength * remEqualpx, prevOffset)
+                // let nextOffset = this.getNextOffset(_nodeAngle, _nodeAngleParent, dLength, prevOffset)
                 // console.log('偏移后点击中心坐标：' + nextOffset)
                 _node.animate({width: '+=' + dLength + 'px'}, 1000, fn)
                 // var lineOffset = this.getLineWH(_nodeAngle, dLength)
@@ -132,7 +132,6 @@
         mounted() {
             var docEl = document.documentElement
             var clientWidth = docEl.clientWidth;
-            remEqualpx = 1
             var that = this
             pageCenter = [$(window).width() / 2, $(window).height() / 2]
             // console.log('当前窗口中心坐标：' + pageCenter)
@@ -143,7 +142,7 @@
 
             $('.circle').click(function () {
                 var _this = this
-                console.log($(this).data('index'))
+                // console.log($(this).data('index'))
                 var circlePoint = [$(this).offset().left + $(this).width() / 2, $(this).offset().top + $(this).height() / 2]
                 // console.log('当前点击中心坐标：' + circlePoint)
                 if ($(_this).hasClass('active')) {
@@ -159,25 +158,48 @@
                             }, 1000)
                         }, 1000)
                     }, 1000)
+                    activeNode = -1
                 } else {
-                    var finalOffset = that.lineChangeAnimate(this, dw1, circlePoint, function () {
-                    })
-                    // console.log('偏移后点击中心坐标：' + finalOffset)
-                    var finalMove = that.computedFinal(finalOffset)
-                    setTimeout(function () {
-                        $('.position').animate({
-                            top: '+=' + finalMove[1],
-                            left: '+=' + finalMove[0]
-                        }, 1500, function () {
-                            $(_this).nextAll().css('display', 'flex')
-                        })
+                    if(activeNode!==-1){
+                        $('.type1-common').eq(activeNode).find('.circle').removeClass('active').nextAll().removeClass('active')
+                        setTimeout(function(){
+                            $('.type1-common').eq(activeNode).animate({width: '-=' + dw1 + 'px'}, 1000,function(){
+                                activeNode = $(_this).data('index')
+                                // console.log('偏移后点击中心坐标：' + finalOffset)
+                            })
+                            var finalOffset = that.lineChangeAnimate(_this, dw1, circlePoint, function () {})
+                            var finalMove = that.computedFinal(finalOffset)
+                            setTimeout(function () {
+                                $('.position').animate({
+                                    top: '+=' + finalMove[1],
+                                    left: '+=' + finalMove[0]
+                                }, 1500, function () {
+                                    $(_this).nextAll().css('display', 'flex')
+                                })
+                                setTimeout(function () {
+                                    $(_this).addClass('active').nextAll().addClass('active')
+                                }, 1600)
+                            }, 1000)
+                        },1000)
+                        return false
+                    } else {
+                        activeNode = $(this).data('index')
+                        var finalOffset = that.lineChangeAnimate(this, dw1, circlePoint, function () {})
+                        // console.log('偏移后点击中心坐标：' + finalOffset)
+                        var finalMove = that.computedFinal(finalOffset)
                         setTimeout(function () {
-                            $(_this).addClass('active').nextAll().addClass('active')
-                        }, 1600)
-                    }, 1000)
+                            $('.position').animate({
+                                top: '+=' + finalMove[1],
+                                left: '+=' + finalMove[0]
+                            }, 1500, function () {
+                                $(_this).nextAll().css('display', 'flex')
+                            })
+                            setTimeout(function () {
+                                $(_this).addClass('active').nextAll().addClass('active')
+                            }, 1600)
+                        }, 1000)
+                    }
                 }
-
-
             })
             $('.circle2').click(function (e) {
                 e.stopPropagation()
