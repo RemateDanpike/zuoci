@@ -1,0 +1,28 @@
+$themeColor: #3196FA;
+$model:2;//1为小屏模式  其他未大屏模式，小屏模式不适用本地调试
+
+@function vh($px) {
+  @if($model==1){
+    @return ($px*100 / 1080) / 100* 100vh;
+  }
+  @else{
+    @return $px / 100* 100px;
+  }
+}
+@function vw($px) {
+  @if($model==1){
+    @return ($px*100 / 1920) / 100* 100vw;
+  }
+  @else{
+    @return $px / 100* 100px;
+  }
+}
+@function vwMax($px) {
+  @if($model==1){
+    @return ($px*100 / 3840) / 100* 100vw;
+  }
+  @else{
+    @return $px / 100* 100px;
+  }
+}
+
