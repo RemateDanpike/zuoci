@@ -19,7 +19,9 @@
             >
                 <div class="line"></div>
                 <div class="circle2" :data-index="index2">
-                    <span :style="[{transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'}]">{{item2}}</span>
+                    <span :style="[{
+                    transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'
+                    }]">{{item2}}</span>
                 </div>
             </div>
         </div>
@@ -36,7 +38,7 @@
         data() {
             return {
                 typeList: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-                typeList2: ['1', '111111', '', '', '', '', '', '', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+                typeList2: ['1', '111111','1', '2', '3', '4', '5', '6', '7', '8', '9'],
             }
         },
         components: {},
