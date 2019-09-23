@@ -9,7 +9,7 @@
         >
             <div class="line"></div>
             <div class="circle" :data-index="index">
-                <span :style="[{transform:'rotate('+-((360/typeList.length*index+180+(360/typeList.length)/2))+'deg)'}]">{{item}}</span>
+                <span :style="[{transform:'rotate('+-((360/typeList.length*index+180+(360/typeList.length)/2))+'deg)'}]">{{index}}</span>
             </div>
             <div class="type2-common"
                  :data-parentangle='360/typeList.length*index+180+(360/typeList.length)/2'
@@ -21,7 +21,7 @@
                 <div class="circle2" :data-index="index2">
                     <span :style="[{
                     transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'
-                    }]">{{item2}}</span>
+                    }]">{{index2}}</span>
                 </div>
             </div>
         </div>
@@ -32,13 +32,13 @@
     var dw1 = 500, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
     var centerPoint,
         activeNode = -1,
-        clickStatus=false//点击状态，防止重复点击
+        clickStatus = false//点击状态，防止重复点击
     export default {
         name: "index",
         data() {
             return {
                 typeList: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-                typeList2: ['1', '111111','1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                typeList2: ['1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '2', '3', '4', '5', '6', '7', '8', '9', '2', '3', '4', '5', '6', '7', '8', '9', '2', '3', '4', '5', '6', '7', '8', '9', '2', '3', '4', '5', '6', '7', '8', '9', '2', '3', '4', '5', '6', '7', '8', '9', '2'],
             }
         },
         components: {},
@@ -148,10 +148,25 @@
                 this.$nextTick(function () {
                     $('html,body').animate({scrollTop: boxTop, scrollLeft: boxLeft}, 1000);
                 })
+            },
+            getCircle(node) {
+                var that = this
+                    var ang = (360 / that.typeList2.length) * Math.PI / 180
+                    var length = Math.tan(ang/2)*200
+                console.log(360 / that.typeList2.length)
+                    if(ang>Math.PI/6){
+                        return false
+                    } else {
+                        $('.type2-common').find('.line').next().css({
+                            width:length*2*.8,
+                            height:length*2*.8
+                        })
+                    }
             }
         },
         mounted() {
             this.scrollCenter()
+            this.getCircle()
             var docEl = document.documentElement
             var clientWidth = docEl.clientWidth;
             var that = this
@@ -166,7 +181,7 @@
             $('.circle').click(function () {
                 // that.scrollCenter()
                 var _this = this
-                if(!clickStatus){
+                if (!clickStatus) {
                     clickStatus = true
                     // console.log($(this).data('index'))
                     var circlePoint = [$(this).offset().left + $(this).width() / 2, $(this).offset().top + $(this).height() / 2]
@@ -222,9 +237,6 @@
                             that.scrollCenter()
                             setTimeout(function () {
                                 $(_this).addClass('active').nextAll().addClass('active')
-                                setTimeout(function () {
-                                    // that.scrollCenter()
-                                }, 1050)
                             }, 1050)
                         }
                     }
@@ -263,8 +275,8 @@
     $oneWidth: vwMax(220); //一级圆直径
     $twoWidth: vwMax(400); //一级虚线长度
     $threeWidth: vwMax(200); //二级圆直径
-    $fiveWidth: vwMax(500); //二级虚线长度
-    $sixWidth: vwMax(50); //三级圆直径
+    $fiveWidth: 200px; //二级虚线长度
+    $sixWidth: 1px; //三级圆直径
     .index {
         /*background: #bfc0ae;*/
         position: relative;
@@ -299,6 +311,7 @@
             transition: width 1s;
 
             .circle {
+                cursor: pointer;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -329,12 +342,14 @@
             &.active {
                 width: $fiveWidth;
                 height: $sixWidth;
+                height: $sixWidth;
                 overflow: inherit;
             }
 
             transition: all 1s;
 
             .circle2 {
+                cursor: pointer;
                 display: flex;
                 justify-content: center;
                 align-items: center;
