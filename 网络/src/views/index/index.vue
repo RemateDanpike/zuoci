@@ -34,7 +34,7 @@
         data() {
             return {
                 typeList: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-                typeList2: ['1','111111','','','','','','','','','','','','','1','','','','','','','','','','','','',''],
+                typeList2: ['1', '111111', '', '', '', '', '', '', '', '', '', '', '', '', '1', '', '', '', '', '', '', '', '', '', '', '', '', ''],
             }
         },
         components: {},
@@ -133,15 +133,15 @@
                 // console.log('当前偏移距离数组：' + this.getLineWH(_nodeAngle, dw1))
                 return nextOffset
             },
-            scrollCenter(){
+            scrollCenter() {
                 var boxTop = $('.index').offset().top
                 var boxLeft = $('.index').offset().left
                 var _documentHeight = $(document).height()
                 var _documentWidth = $(document).width()
-                var percentTop = boxTop/_documentHeight
-                var percentLeft = boxLeft/_documentWidth
-                this.$nextTick(function(){
-                    $('html,body').animate({scrollTop:boxTop,scrollLeft:boxLeft},1000);
+                var percentTop = boxTop / _documentHeight
+                var percentLeft = boxLeft / _documentWidth
+                this.$nextTick(function () {
+                    $('html,body').animate({scrollTop: boxTop, scrollLeft: boxLeft}, 1000);
                 })
             }
         },
@@ -193,9 +193,10 @@
                             }, 1500, function () {
                                 $(_this).nextAll().css('display', 'flex')
                             })
+                            that.scrollCenter()
                             setTimeout(function () {
                                 $(_this).addClass('active').nextAll().addClass('active')
-                                that.scrollCenter()
+                                // that.scrollCenter()
                             }, 1600)
                         }, 1000)
                         return false
@@ -211,11 +212,12 @@
                         }, 1000, function () {
                             $(_this).nextAll().css('display', 'flex')
                         })
+                        that.scrollCenter()
                         setTimeout(function () {
                             $(_this).addClass('active').nextAll().addClass('active')
-                            setTimeout(function(){
-                                that.scrollCenter()
-                            },1050)
+                            setTimeout(function () {
+                                // that.scrollCenter()
+                            }, 1050)
                         }, 1050)
                     }
                 }
