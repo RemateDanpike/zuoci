@@ -151,17 +151,17 @@
             },
             getCircle(node) {
                 var that = this
-                    var ang = (360 / that.typeList2.length) * Math.PI / 180
-                    var length = Math.tan(ang/2)*200
+                var ang = (360 / that.typeList2.length) * Math.PI / 180
+                var length = Math.tan(ang / 2) * 200
                 console.log(360 / that.typeList2.length)
-                    if(ang>Math.PI/6){
-                        return false
-                    } else {
-                        $('.type2-common').find('.line').next().css({
-                            width:length*2*.8,
-                            height:length*2*.8
-                        })
-                    }
+                if (ang > Math.PI / 6) {
+                    return false
+                } else {
+                    $('.type2-common').find('.line').next().css({
+                        width: length * 2 * .8,
+                        height: length * 2 * .8
+                    })
+                }
             }
         },
         mounted() {
@@ -188,11 +188,11 @@
                     // console.log('当前点击中心坐标：' + circlePoint)
                     if ($(_this).hasClass('active')) {
                         $(_this).removeClass('active').nextAll().removeClass('active')
-                        setTimeout(function(){
+                        setTimeout(function () {
                             $('.type2-common').css({
-                                overflow:'hidden'
+                                overflow: 'hidden'
                             })
-                        },800)
+                        }, 800)
                         setTimeout(function () {
                             $(_this).parent().css({width: $(_this).parent().width() - dw1 + 'px'})
                             centerPoint = [$('.center').offset().left + $('.center').width() / 2, $('.center').offset().top + $('.center').height() / 2]
@@ -207,11 +207,11 @@
                     } else {
                         if (activeNode !== -1) {
                             $('.type1-common').eq(activeNode).find('.circle').removeClass('active').nextAll().removeClass('active')
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 $('.type2-common').css({
-                                    overflow:'hidden'
+                                    overflow: 'hidden'
                                 })
-                            },800)
+                            }, 800)
                             setTimeout(function () {
                                 $('.type1-common').eq(activeNode).css({width: $('.type1-common').eq(activeNode).width() - dw1 + 'px'})
                                 activeNode = $(_this).data('index')
@@ -226,11 +226,11 @@
                                     $(_this).nextAll().css('display', 'flex')
                                 })
                                 that.scrollCenter()
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     $('.type2-common').css({
-                                        overflow:'inherit'
+                                        overflow: 'inherit'
                                     })
-                                },800)
+                                }, 800)
                                 setTimeout(function () {
                                     $(_this).addClass('active').nextAll().addClass('active')
                                     // that.scrollCenter()
@@ -250,11 +250,11 @@
                                 $(_this).nextAll().css('display', 'flex')
                             })
                             that.scrollCenter()
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 $('.type2-common').css({
-                                    overflow:'inherit'
+                                    overflow: 'inherit'
                                 })
-                            },800)
+                            }, 800)
                             setTimeout(function () {
                                 $(_this).addClass('active').nextAll().addClass('active')
                             }, 1050)
@@ -310,7 +310,7 @@
             z-index: 1000000;
             width: $oneWidth;
             height: $oneWidth;
-            background: salmon;
+            background: #2b6b3e;
             border-radius: 50%;
             margin-top: -$oneWidth/2;
             margin-left: -$oneWidth/2;
@@ -358,6 +358,7 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
+
             &.active {
                 width: $fiveWidth;
                 height: $sixWidth;
@@ -375,7 +376,7 @@
                 width: $sixWidth;
                 height: $sixWidth;
                 border-radius: 50%;
-                background: darkgray;
+                background: #5fa084;
                 position: relative;
             }
         }
