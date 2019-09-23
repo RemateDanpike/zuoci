@@ -28,7 +28,9 @@
 
 <script>
     var dw1 = 500, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
-    var centerPoint, activeNode = -1
+    var centerPoint,
+        activeNode = -1,
+        clickStatus=false//点击状态，防止重复点击
     export default {
         name: "index",
         data() {
@@ -134,6 +136,7 @@
                 return nextOffset
             },
             scrollCenter() {
+                clickStatus = false
                 var boxTop = $('.index').offset().top
                 var boxLeft = $('.index').offset().left
                 var _documentHeight = $(document).height()
@@ -161,64 +164,67 @@
             $('.circle').click(function () {
                 // that.scrollCenter()
                 var _this = this
-                // console.log($(this).data('index'))
-                var circlePoint = [$(this).offset().left + $(this).width() / 2, $(this).offset().top + $(this).height() / 2]
-                // console.log('当前点击中心坐标：' + circlePoint)
-                if ($(_this).hasClass('active')) {
-                    $(_this).removeClass('active').nextAll().removeClass('active')
-                    setTimeout(function () {
-                        $(_this).parent().css({width: $(_this).parent().width() - dw1 + 'px'})
-                        centerPoint = [$('.center').offset().left + $('.center').width() / 2, $('.center').offset().top + $('.center').height() / 2]
-                        var finalMove = that.computedFinal(centerPoint)
-                        $('.position').animate({
-                            top: '+=' + finalMove[1],
-                            left: '+=' + finalMove[0]
-                        }, 1000)
-                        that.scrollCenter()
-                    }, 1000)
-                    activeNode = -1
-                } else {
-                    if (activeNode !== -1) {
-                        $('.type1-common').eq(activeNode).find('.circle').removeClass('active').nextAll().removeClass('active')
+                if(!clickStatus){
+                    clickStatus = true
+                    // console.log($(this).data('index'))
+                    var circlePoint = [$(this).offset().left + $(this).width() / 2, $(this).offset().top + $(this).height() / 2]
+                    // console.log('当前点击中心坐标：' + circlePoint)
+                    if ($(_this).hasClass('active')) {
+                        $(_this).removeClass('active').nextAll().removeClass('active')
                         setTimeout(function () {
-                            $('.type1-common').eq(activeNode).css({width: $('.type1-common').eq(activeNode).width() - dw1 + 'px'})
-                            activeNode = $(_this).data('index')
-                            // console.log('偏移后点击中心坐标：' + finalOffset)
-                            var finalOffset = that.lineChangeAnimate(_this, dw1, circlePoint, function () {
+                            $(_this).parent().css({width: $(_this).parent().width() - dw1 + 'px'})
+                            centerPoint = [$('.center').offset().left + $('.center').width() / 2, $('.center').offset().top + $('.center').height() / 2]
+                            var finalMove = that.computedFinal(centerPoint)
+                            $('.position').animate({
+                                top: '+=' + finalMove[1],
+                                left: '+=' + finalMove[0]
+                            }, 1000)
+                            that.scrollCenter()
+                        }, 1000)
+                        activeNode = -1
+                    } else {
+                        if (activeNode !== -1) {
+                            $('.type1-common').eq(activeNode).find('.circle').removeClass('active').nextAll().removeClass('active')
+                            setTimeout(function () {
+                                $('.type1-common').eq(activeNode).css({width: $('.type1-common').eq(activeNode).width() - dw1 + 'px'})
+                                activeNode = $(_this).data('index')
+                                // console.log('偏移后点击中心坐标：' + finalOffset)
+                                var finalOffset = that.lineChangeAnimate(_this, dw1, circlePoint, function () {
+                                })
+                                var finalMove = that.computedFinal(finalOffset)
+                                $('.position').animate({
+                                    top: '+=' + finalMove[1],
+                                    left: '+=' + finalMove[0]
+                                }, 1500, function () {
+                                    $(_this).nextAll().css('display', 'flex')
+                                })
+                                that.scrollCenter()
+                                setTimeout(function () {
+                                    $(_this).addClass('active').nextAll().addClass('active')
+                                    // that.scrollCenter()
+                                }, 1600)
+                            }, 1000)
+                            return false
+                        } else {
+                            activeNode = $(this).data('index')
+                            var finalOffset = that.lineChangeAnimate(this, dw1, circlePoint, function () {
                             })
+                            // console.log('偏移后点击中心坐标：' + finalOffset)
                             var finalMove = that.computedFinal(finalOffset)
                             $('.position').animate({
                                 top: '+=' + finalMove[1],
                                 left: '+=' + finalMove[0]
-                            }, 1500, function () {
+                            }, 1000, function () {
                                 $(_this).nextAll().css('display', 'flex')
                             })
                             that.scrollCenter()
                             setTimeout(function () {
                                 $(_this).addClass('active').nextAll().addClass('active')
-                                // that.scrollCenter()
-                            }, 1600)
-                        }, 1000)
-                        return false
-                    } else {
-                        activeNode = $(this).data('index')
-                        var finalOffset = that.lineChangeAnimate(this, dw1, circlePoint, function () {
-                        })
-                        // console.log('偏移后点击中心坐标：' + finalOffset)
-                        var finalMove = that.computedFinal(finalOffset)
-                        $('.position').animate({
-                            top: '+=' + finalMove[1],
-                            left: '+=' + finalMove[0]
-                        }, 1000, function () {
-                            $(_this).nextAll().css('display', 'flex')
-                        })
-                        that.scrollCenter()
-                        setTimeout(function () {
-                            $(_this).addClass('active').nextAll().addClass('active')
-                            setTimeout(function () {
-                                // that.scrollCenter()
+                                setTimeout(function () {
+                                    // that.scrollCenter()
+                                }, 1050)
                             }, 1050)
-                        }, 1050)
+                        }
                     }
                 }
             })
