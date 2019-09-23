@@ -375,7 +375,7 @@
                 width: $sixWidth;
                 height: $sixWidth;
                 border-radius: 50%;
-                background: red;
+                background: darkgray;
                 position: relative;
             }
         }
