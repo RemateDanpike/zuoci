@@ -24,7 +24,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: vwMax(4440);
-        height: vh(1680);
+        width: 100%;
+        height:100%;
     }
 </style>

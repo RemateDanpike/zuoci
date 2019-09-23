@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    var dw1 = 700, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
+    var dw1 = 500, dw2 = 100, pageCenter;//虚线一变长长度和虚线二变长长度定义，此处为像素，动画修改css要除100,pageCenter为页面中心坐标
     var centerPoint, activeNode = -1
     export default {
         name: "index",
@@ -134,8 +134,14 @@
                 return nextOffset
             },
             scrollCenter(){
+                var boxTop = $('.index').offset().top
+                var boxLeft = $('.index').offset().left
+                var _documentHeight = $(document).height()
+                var _documentWidth = $(document).width()
+                var percentTop = boxTop/_documentHeight
+                var percentLeft = boxLeft/_documentWidth
                 this.$nextTick(function(){
-                    $('html,body').animate({scrollTop:($(document).height()-$(window).height())/2,scrollLeft:($(document).width()-$(window).width())/2},1000);
+                    $('html,body').animate({scrollTop:boxTop,scrollLeft:boxLeft},1000);
                 })
             }
         },
@@ -326,7 +332,7 @@
                 width: $sixWidth;
                 height: $sixWidth;
                 border-radius: 50%;
-                background: darkblue;
+                background: red;
                 position: relative;
             }
         }
