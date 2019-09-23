@@ -18,7 +18,7 @@
                  :style="[{transform:'rotate('+(360/typeList2.length*index2+180+(360/typeList2.length)/2)+'deg)'}]"
             >
                 <div class="line"></div>
-                <div class="circle2">
+                <div class="circle2" :data-index="index2">
                     <span :style="[{transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'}]">{{item2}}</span>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         data() {
             return {
                 typeList: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-                typeList2: ['1', '2', '3', '4', '5', '11', '21', '31', '41', '51', '111', '211', '311', '411', '511', '1111', '2111', '3111', '4111', '5111', '11111', '211111', '3111111', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5'],
+                typeList2: ['1','111111','','','','','','','','','','','','','1','','','','','','','','','','','','',''],
             }
         },
         components: {},
@@ -215,7 +215,8 @@
                 }
             })
             $('.circle2').click(function (e) {
-                e.stopPropagation()
+                // e.stopPropagation()
+                console.log($(this).data('index'))
                 // var circle2Point = [$(this).offset().left + $(this).width() / 2, $(this).offset().top + $(this).height() / 2]
                 // // console.log('当前点击中心坐标：' + circle2Point)
                 // var finalOffset1 = that.lineChangeAnimate(this, dw2, circle2Point,function(){})
@@ -301,16 +302,18 @@
             width: 0;
             height: 0;
             margin-left: 0;
-            margin-top: -$threeWidth/2;
-            transform-origin: -$threeWidth/2 $threeWidth/2;
+            margin-top: -$sixWidth/2;
+            transform-origin: -$threeWidth/2 $sixWidth/2;
             /*display: flex;*/
             display: none;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
 
             &.active {
                 width: $fiveWidth;
-                height: $threeWidth;
+                height: $sixWidth;
+                overflow: inherit;
             }
 
             transition: all 1s;
