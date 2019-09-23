@@ -1,6 +1,6 @@
 <template>
     <div class="index">
-        <div class="position center"></div>
+        <div class="position center">指标</div>
         <div class="position type1-common"
              :data-parentangle='0'
              :data-angle='360/typeList.length*index+180+(360/typeList.length)/2'
@@ -310,6 +310,9 @@
             z-index: 1000000;
             width: $oneWidth;
             height: $oneWidth;
+            text-align: center;
+            line-height: $oneWidth;
+            font-size: vwMax(40);
             background: #2b6b3e;
             border-radius: 50%;
             margin-top: -$oneWidth/2;
