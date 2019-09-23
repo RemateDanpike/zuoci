@@ -8,7 +8,9 @@
              :style="[{transform:'rotate('+(360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'}]"
         >
             <div class="line"></div>
-            <div class="circle" :data-index="index"></div>
+            <div class="circle" :data-index="index">
+                <span :style="[{transform:'rotate('+-((360/typeList.length*index+180+(360/typeList.length)/2))+'deg)'}]">{{item}}</span>
+            </div>
             <div class="type2-common"
                  :data-parentangle='360/typeList.length*index+180+(360/typeList.length)/2'
                  :data-angle='360/typeList2.length*index2+180+(360/typeList2.length)/2'
@@ -16,7 +18,9 @@
                  :style="[{transform:'rotate('+(360/typeList2.length*index2+180+(360/typeList2.length)/2)+'deg)'}]"
             >
                 <div class="line"></div>
-                <div class="circle2"></div>
+                <div class="circle2">
+                    <span :style="[{transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'}]">{{item2}}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -29,8 +33,8 @@
         name: "index",
         data() {
             return {
-                typeList: ['1', '2', '3', '4', '5', '', '', '1', '2'],
-                typeList2: ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5'],
+                typeList: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+                typeList2: ['1', '2', '3', '4', '5', '11', '21', '31', '41', '51', '111', '211', '311', '411', '511', '1111', '2111', '3111', '4111', '5111', '11111', '211111', '3111111', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4', '5'],
             }
         },
         components: {},
@@ -224,6 +228,17 @@
                 //     }, 2000)
                 // }, 2000)
             })
+            // setTimeout(function(){
+            //     console.log(12)
+            //     $('.type1-common').eq(1).find('.circle').trigger('click')
+            //     setTimeout(function(){
+            //         $('.type1-common').eq(1).find('.circle').trigger('click')
+            //         setTimeout(function(){
+            //             console.log(12)
+            //             $('.type1-common').eq(2).find('.circle').trigger('click')
+            //         },3000)
+            //     },3000)
+            // },3000)
         }
     };
 </script>
