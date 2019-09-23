@@ -188,6 +188,11 @@
                     // console.log('当前点击中心坐标：' + circlePoint)
                     if ($(_this).hasClass('active')) {
                         $(_this).removeClass('active').nextAll().removeClass('active')
+                        setTimeout(function(){
+                            $('.type2-common').css({
+                                overflow:'hidden'
+                            })
+                        },800)
                         setTimeout(function () {
                             $(_this).parent().css({width: $(_this).parent().width() - dw1 + 'px'})
                             centerPoint = [$('.center').offset().left + $('.center').width() / 2, $('.center').offset().top + $('.center').height() / 2]
@@ -202,6 +207,11 @@
                     } else {
                         if (activeNode !== -1) {
                             $('.type1-common').eq(activeNode).find('.circle').removeClass('active').nextAll().removeClass('active')
+                            setTimeout(function(){
+                                $('.type2-common').css({
+                                    overflow:'hidden'
+                                })
+                            },800)
                             setTimeout(function () {
                                 $('.type1-common').eq(activeNode).css({width: $('.type1-common').eq(activeNode).width() - dw1 + 'px'})
                                 activeNode = $(_this).data('index')
@@ -216,6 +226,11 @@
                                     $(_this).nextAll().css('display', 'flex')
                                 })
                                 that.scrollCenter()
+                                setTimeout(function(){
+                                    $('.type2-common').css({
+                                        overflow:'inherit'
+                                    })
+                                },800)
                                 setTimeout(function () {
                                     $(_this).addClass('active').nextAll().addClass('active')
                                     // that.scrollCenter()
@@ -235,6 +250,11 @@
                                 $(_this).nextAll().css('display', 'flex')
                             })
                             that.scrollCenter()
+                            setTimeout(function(){
+                                $('.type2-common').css({
+                                    overflow:'inherit'
+                                })
+                            },800)
                             setTimeout(function () {
                                 $(_this).addClass('active').nextAll().addClass('active')
                             }, 1050)
@@ -337,13 +357,11 @@
             display: none;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-
+            opacity: 0;
             &.active {
                 width: $fiveWidth;
                 height: $sixWidth;
-                height: $sixWidth;
-                overflow: inherit;
+                opacity: 1;
             }
 
             transition: all 1s;
