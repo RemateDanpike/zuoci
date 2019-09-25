@@ -305,6 +305,17 @@
             transform: rotate(360deg);
         }
     }
+    @keyframes scal {
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(1.2);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
     .index {
         /*background: #bfc0ae;*/
         position: relative;
@@ -326,8 +337,8 @@
             margin-left: -$oneWidth/2;
             background: url("./img/t3.gif") no-repeat;
             background-size: 100% 100%;
-            /*animation: circle 4s infinite linear;*/
-            /*animation-fill-mode: forwards;*/
+            animation: scal 4.4s infinite linear 3s;
+            animation-fill-mode: forwards;
         }
 
         .type1-common {
