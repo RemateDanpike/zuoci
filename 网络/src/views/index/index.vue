@@ -232,7 +232,16 @@
                                     })
                                 }, 800)
                                 setTimeout(function () {
-                                    $(_this).addClass('active').nextAll().addClass('active')
+                                    // $(_this).addClass('active').nextAll().addClass('active')
+                                    $(_this).addClass('active').parent().find('.type2-common').map(function(item,index){
+                                        console.log(item)
+                                        if(item%2==0){
+                                            $(this).addClass('active').css('width','250px')
+                                        } else {
+                                            $(this).addClass('active')
+                                        }
+
+                                    })
                                     // that.scrollCenter()
                                 }, 1600)
                             }, 1000)
@@ -256,7 +265,16 @@
                                 })
                             }, 800)
                             setTimeout(function () {
-                                $(_this).addClass('active').nextAll().addClass('active')
+                                // $(_this).addClass('active').nextAll().addClass('active')
+                                $(_this).addClass('active').parent().find('.type2-common').map(function(item,index){
+                                    console.log(item)
+                                    if(item%2==0){
+                                        $(this).addClass('active').css('width','250px')
+                                    } else {
+                                        $(this).addClass('active')
+                                    }
+
+                                })
                             }, 1050)
                         }
                     }
@@ -337,6 +355,8 @@
             margin-left: -$oneWidth/2;
             background: url("./img/t3.gif") no-repeat;
             background-size: 100% 100%;
+            animation: circle 4s infinite linear;
+            animation-fill-mode: forwards;
         }
 
         .type1-common {
