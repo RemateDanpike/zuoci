@@ -324,10 +324,10 @@
             border-radius: 50%;
             margin-top: -$oneWidth/2;
             margin-left: -$oneWidth/2;
-            background: url("./img/timg.jpg") no-repeat;
+            background: url("./img/t3.gif") no-repeat;
             background-size: 100% 100%;
-            animation: circle 4s infinite linear;
-            animation-fill-mode: forwards;
+            /*animation: circle 4s infinite linear;*/
+            /*animation-fill-mode: forwards;*/
         }
 
         .type1-common {
@@ -343,7 +343,6 @@
             justify-content: center;
             align-items: center;
             transition: width 1s;
-
             .circle {
                 cursor: pointer;
                 display: flex;
@@ -359,6 +358,8 @@
                 &.active{
                     background: url("./img/t1.jpg") no-repeat;
                     background-size: 100% 100%;
+                    animation: circle 4s infinite linear;
+                    animation-fill-mode: forwards;
                 }
             }
         }
