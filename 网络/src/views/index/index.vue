@@ -337,8 +337,6 @@
             margin-left: -$oneWidth/2;
             background: url("./img/t3.gif") no-repeat;
             background-size: 100% 100%;
-            animation: scal 4.4s infinite linear 3s;
-            animation-fill-mode: forwards;
         }
 
         .type1-common {
