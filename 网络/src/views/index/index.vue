@@ -17,7 +17,7 @@
                  v-for="(item2,index2) in typeList2"
                  :style="[{transform:'rotate('+(360/typeList2.length*index2+180+(360/typeList2.length)/2)+'deg)'}]"
             >
-                <div class="line"></div>
+                <div class="line1"></div>
                 <div class="circle2" :data-index="index2">
                     <span :style="[{
                     transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'
@@ -157,7 +157,7 @@
                 if (ang > Math.PI / 6) {
                     return false
                 } else {
-                    $('.type2-common').find('.line').next().css({
+                    $('.type2-common').find('.line1').next().css({
                         width: length * 2 * .8,
                         height: length * 2 * .8
                     })
@@ -412,6 +412,11 @@
 
 
         .line {
+            flex: 1;
+            height: 1px;
+            border-top: 1px dotted #dddddd;
+        }
+        .line1 {
             flex: 1;
             height: 1px;
             border-top: 1px dotted #666;
