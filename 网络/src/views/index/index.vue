@@ -1,6 +1,6 @@
 <template>
     <div class="index">
-        <div class="position center">指标</div>
+        <div class="position center"></div>
         <div class="position type1-common"
              :data-parentangle='0'
              :data-angle='360/typeList.length*index+180+(360/typeList.length)/2'
@@ -9,7 +9,7 @@
         >
             <div class="line"></div>
             <div class="circle" :data-index="index">
-                <span :style="[{transform:'rotate('+-((360/typeList.length*index+180+(360/typeList.length)/2))+'deg)'}]">{{index}}</span>
+                <span :style="[{transform:'rotate('+-((360/typeList.length*index+180+(360/typeList.length)/2))+'deg)'}]"></span>
             </div>
             <div class="type2-common"
                  :data-parentangle='360/typeList.length*index+180+(360/typeList.length)/2'
@@ -21,7 +21,7 @@
                 <div class="circle2" :data-index="index2">
                     <span :style="[{
                     transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'
-                    }]">{{index2}}</span>
+                    }]"></span>
                 </div>
             </div>
         </div>
@@ -297,12 +297,19 @@
     $threeWidth: vwMax(200); //二级圆直径
     $fiveWidth: 200px; //二级虚线长度
     $sixWidth: 1px; //三级圆直径
+    @keyframes circle {
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
     .index {
         /*background: #bfc0ae;*/
         position: relative;
         width: vwMax(3840);
         height: vh(1080);
-
         .center {
             position: absolute;
             top: 50%;
@@ -313,10 +320,14 @@
             text-align: center;
             line-height: $oneWidth;
             font-size: vwMax(40);
-            background: #2b6b3e;
+            /*background: #2b6b3e;*/
             border-radius: 50%;
             margin-top: -$oneWidth/2;
             margin-left: -$oneWidth/2;
+            background: url("./img/timg.jpg") no-repeat;
+            background-size: 100% 100%;
+            animation: circle 4s infinite linear;
+            animation-fill-mode: forwards;
         }
 
         .type1-common {
@@ -342,8 +353,13 @@
                 width: $threeWidth;
                 height: $threeWidth;
                 border-radius: 50%;
-                background: darkcyan;
                 position: relative;
+                background: url("./img/t2.jpg") no-repeat;
+                background-size: 100% 100%;
+                &.active{
+                    background: url("./img/t1.jpg") no-repeat;
+                    background-size: 100% 100%;
+                }
             }
         }
 
