@@ -19,7 +19,7 @@
                      :style="[{transform:'rotate('+(360/typeList2.length*index2+180+(360/typeList2.length)/2)+'deg)'}]"
                 >
                     <div class="line1"></div>
-                    <div class="circle2" :data-index="index2">
+                    <div class="circle2" :data-index="index2" @click="jump">
                     <span :style="[{
                     transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'
                     }]"></span>
@@ -48,6 +48,9 @@
 
         },
         methods: {
+            jump(){
+                this.$router.push('detail')
+            },
             computedFinal(finalOffset) {
                 return [pageCenter[0] - finalOffset[0], pageCenter[1] - finalOffset[1]]
             },
