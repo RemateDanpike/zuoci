@@ -19,9 +19,9 @@
 
 /* 禁用iPhone中Safari的字号自动调整 */
 html {
-  height: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  background: #10344d;
 }
 
 /* 初始化 */
@@ -32,15 +32,19 @@ body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, d
 
 body {
   font-family: 'Microsoft Yahei', '微软雅黑', '宋体', arial, 'Hiragino Sans GB', Tahoma, Arial, Helvetica;
-  height: 100%;
   margin:0 auto;
   background: rgba(255,255,255,1);
 }
-
-html,body{
+.main{
+  position: relative;
   background: #161c57;
   width: vwMax(4440);
   height: vh(2280);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../img/bg.png") no-repeat;
+  background-size: 100% 100%;
 }
 
 /*字号、字体*/

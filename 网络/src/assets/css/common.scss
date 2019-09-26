@@ -1,7 +1,7 @@
 $themeColor: #3196FA;
 $scrollBackground:#161c57;
 $scrollPiece:#44519a;
-$model:1;//1为小屏模式  其他未大屏模式，小屏模式不适用本地调试
+$model:2;//1为小屏模式  其他未大屏模式，小屏模式不适用本地调试
 @function vh($px) {
   @if($model==1){
     @return ($px*100 / 1080) / 100* 100vh;

@@ -1,27 +1,29 @@
 <template>
-    <div class="index">
-        <div class="position center"></div>
-        <div class="position type1-common"
-             :data-parentangle='0'
-             :data-angle='360/typeList.length*index+180+(360/typeList.length)/2'
-             v-for="(item,index) in typeList"
-             :style="[{transform:'rotate('+(360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'}]"
-        >
-            <div class="line"></div>
-            <div class="circle" :data-index="index">
-                <span :style="[{transform:'rotate('+-((360/typeList.length*index+180+(360/typeList.length)/2))+'deg)'}]"></span>
-            </div>
-            <div class="type2-common"
-                 :data-parentangle='360/typeList.length*index+180+(360/typeList.length)/2'
-                 :data-angle='360/typeList2.length*index2+180+(360/typeList2.length)/2'
-                 v-for="(item2,index2) in typeList2"
-                 :style="[{transform:'rotate('+(360/typeList2.length*index2+180+(360/typeList2.length)/2)+'deg)'}]"
+    <div class="main">
+        <div class="index">
+            <div class="position center"></div>
+            <div class="position type1-common"
+                 :data-parentangle='0'
+                 :data-angle='360/typeList.length*index+180+(360/typeList.length)/2'
+                 v-for="(item,index) in typeList"
+                 :style="[{transform:'rotate('+(360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'}]"
             >
-                <div class="line1"></div>
-                <div class="circle2" :data-index="index2">
+                <div class="line"></div>
+                <div class="circle" :data-index="index">
+                    <span :style="[{transform:'rotate('+-((360/typeList.length*index+180+(360/typeList.length)/2))+'deg)'}]"></span>
+                </div>
+                <div class="type2-common"
+                     :data-parentangle='360/typeList.length*index+180+(360/typeList.length)/2'
+                     :data-angle='360/typeList2.length*index2+180+(360/typeList2.length)/2'
+                     v-for="(item2,index2) in typeList2"
+                     :style="[{transform:'rotate('+(360/typeList2.length*index2+180+(360/typeList2.length)/2)+'deg)'}]"
+                >
+                    <div class="line1"></div>
+                    <div class="circle2" :data-index="index2">
                     <span :style="[{
                     transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'
                     }]"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -171,7 +173,7 @@
             var clientWidth = docEl.clientWidth;
             var that = this
             pageCenter = [$(window).width() / 2, $(window).height() / 2]
-            pageCenter = [$('#app').width() / 2, $('#app').height() / 2]
+            pageCenter = [$('.main').width() / 2, $('.main').height() / 2]
             // console.log('当前窗口中心坐标：' + pageCenter)
             $('.center').click(function () {
                 centerPoint = [$(this).offset().left + $(this).width() / 2, $(this).offset().top + $(this).height() / 2]

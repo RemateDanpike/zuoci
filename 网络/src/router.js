@@ -22,7 +22,7 @@ export default new Router({
           name: "index",
           path: "/index",
           component: () => import("./views/index/index.vue"),
-          chunkName: "views/hello",
+          chunkName: "views/detail",
           meta: {
             name: "",
             index: 1,
@@ -33,14 +33,14 @@ export default new Router({
       ],
       hidden: true
     }, {
-          name: "hello",
-          path: "/hello",
+          name: "detail",
+          path: "/detail",
           meta: {
               index: 2,
               title: "",
               auth: true
           },
-          component: () => import("./views/hello/hello.vue")
+          component: () => import("./views/detail/detail.vue")
       }
   ]
 });
