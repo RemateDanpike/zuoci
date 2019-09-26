@@ -19,7 +19,7 @@ export default new Router({
       chunkName: "views/payAftergo",
       children: [
         {
-          name: "index",
+          name: "index2",
           path: "/index",
           component: () => import("./views/index/index.vue"),
           chunkName: "views/detail",
