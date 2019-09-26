@@ -19,7 +19,7 @@
                      :style="[{transform:'rotate('+(360/typeList2.length*index2+180+(360/typeList2.length)/2)+'deg)'}]"
                 >
                     <div class="line1"></div>
-                    <div class="circle2" :data-index="index2" @click="jump">
+                    <div class="circle2" :data-index="index2" @click="jump(index2)">
                     <span :style="[{
                     transform:'rotate('+-((360/typeList2.length*index2+180+(360/typeList2.length)/2)+360/typeList.length*index+180+(360/typeList.length)/2)+'deg)'
                     }]"></span>
@@ -48,8 +48,13 @@
 
         },
         methods: {
-            jump(){
-                this.$router.push('detail')
+            jump(i) {
+                this.$router.push({
+                    path: `detail`,
+                    query: {
+                        page: i, code: '8989'
+                    }
+                })
             },
             computedFinal(finalOffset) {
                 return [pageCenter[0] - finalOffset[0], pageCenter[1] - finalOffset[1]]
@@ -158,7 +163,7 @@
                 var that = this
                 var ang = (360 / that.typeList2.length) * Math.PI / 180
                 var length = Math.tan(ang / 2) * 200
-                console.log(360 / that.typeList2.length)
+                // console.log(360 / that.typeList2.length)
                 if (ang > Math.PI / 6) {
                     return false
                 } else {
@@ -238,10 +243,10 @@
                                 }, 800)
                                 setTimeout(function () {
                                     // $(_this).addClass('active').nextAll().addClass('active')
-                                    $(_this).addClass('active').parent().find('.type2-common').map(function(item,index){
-                                        console.log(item)
-                                        if(item%2==0){
-                                            $(this).addClass('active').css('width','250px')
+                                    $(_this).addClass('active').parent().find('.type2-common').map(function (item, index) {
+                                        // console.log(item)
+                                        if (item % 2 == 0) {
+                                            $(this).addClass('active').css('width', '250px')
                                         } else {
                                             $(this).addClass('active')
                                         }
@@ -271,10 +276,10 @@
                             }, 800)
                             setTimeout(function () {
                                 // $(_this).addClass('active').nextAll().addClass('active')
-                                $(_this).addClass('active').parent().find('.type2-common').map(function(item,index){
-                                    console.log(item)
-                                    if(item%2==0){
-                                        $(this).addClass('active').css('width','250px')
+                                $(_this).addClass('active').parent().find('.type2-common').map(function (item, index) {
+                                    // console.log(item)
+                                    if (item % 2 == 0) {
+                                        $(this).addClass('active').css('width', '250px')
                                     } else {
                                         $(this).addClass('active')
                                     }
@@ -321,29 +326,32 @@
     $fiveWidth: 200px; //二级虚线长度
     $sixWidth: 1px; //三级圆直径
     @keyframes circle {
-        0%{
+        0% {
             transform: rotate(0deg);
         }
-        100%{
+        100% {
             transform: rotate(360deg);
         }
     }
+
     @keyframes scal {
-        0%{
+        0% {
             transform: scale(1);
         }
-        50%{
+        50% {
             transform: scale(1.2);
         }
-        100%{
+        100% {
             transform: scale(1);
         }
     }
+
     .index {
         /*background: #bfc0ae;*/
         position: relative;
         width: vwMax(3840);
         height: vh(1080);
+
         .center {
             position: absolute;
             top: 50%;
@@ -377,6 +385,7 @@
             justify-content: center;
             align-items: center;
             transition: width 1s;
+
             .circle {
                 cursor: pointer;
                 display: flex;
@@ -389,7 +398,8 @@
                 position: relative;
                 background: url("./img/t2.jpg") no-repeat;
                 background-size: 100% 100%;
-                &.active{
+
+                &.active {
                     background: url("./img/t1.jpg") no-repeat;
                     background-size: 100% 100%;
                     animation: circle 4s infinite linear;
@@ -441,6 +451,7 @@
             height: 1px;
             border-top: 1px dotted #dddddd;
         }
+
         .line1 {
             flex: 1;
             height: 1px;
