@@ -143,7 +143,6 @@
                     col = 5;
                 }
 
-                if (conWidth != currentWidth) {
                     currentWidth = conWidth;
                     $('#container').width(conWidth);
                     $('#container').BlocksIt({
@@ -151,15 +150,13 @@
                         offsetX: 8,
                         offsetY: 8
                     });
-                }
             }
         },
         mounted() {
             var that = this;
-            setTimeout(function () {
-                that.animate()
-            }, 100)
-
+                setTimeout(function(){
+                    $(window).trigger("resize");
+                })
 
             $(window).resize(function () {
                 that.animate()
