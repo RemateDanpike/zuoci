@@ -124,9 +124,9 @@
         activated() {
             console.log(0)
             var that = this
-            setTimeout(function () {
-                that.back()
-            }, 2000)
+            // setTimeout(function () {
+            //     that.back()
+            // }, 2000)
         }
     }
 </script>

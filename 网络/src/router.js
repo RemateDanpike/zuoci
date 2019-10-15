@@ -41,6 +41,15 @@ export default new Router({
               auth: true
           },
           component: () => import("./views/detail/detail.vue")
+      }, {
+          name: "select",
+          path: "/select",
+          meta: {
+              index: 3,
+              title: "",
+              auth: true
+          },
+          component: () => import("./views/select/select.vue")
       }
   ]
 });

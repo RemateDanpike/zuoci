@@ -5,6 +5,7 @@ import qs from 'qs'
 import axios from 'axios'
 import './assets/css/reset.scss'
 import './assets/css/component.scss'
+import './assets/js/blocksit.min'
 
 const loginUrl = process.env.VUE_APP_API_CONFIG === "production" ? 'https://172.18.109.110/api/v1/login' : 'https://172.18.109.110/api/v1/login'
 Vue.config.productionTip = false;
